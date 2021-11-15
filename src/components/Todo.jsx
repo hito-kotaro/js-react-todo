@@ -1,18 +1,40 @@
-/* eslint-disable react/destructuring-assignment */
-import React from 'react';
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState } from 'react';
+import { RiCloseCircleLine } from 'react-icons/ri';
+import { TiEdit } from 'react-icons/ti';
+import TodoForm from './TodoForm';
 
-const Todo = (todos) => {
-  // eslint-disable-next-line no-unused-vars
-  const test = 'Todo';
-  const todoArray = todos.todos;
-  todoArray.map((todo) => console.log(todo.id));
-  // eslint-disable-next-line no-unused-vars
-  return (
+const Todo = (props) => {
+  const [edit, setEdit] = useState({ id: null, value: '' });
+  const { todos } = props;
+  const submitUpdate = (value) => {
+    props.updateTodo(edit.id, value);
+    setEdit({
+      id: null,
+      value: '',
+    });
+  };
+
+  if (edit.id) {
+    return <TodoForm edit={edit} onSubmit={submitUpdate} />;
+  }
+
+  return todos.map((todo) => (
     <>
-      {todoArray.map((todo) => (
-        <div key={todo.id}>{todo.text}</div>
-      ))}
+      <div
+        key={todo.id}
+        onClick={() => props.completeTodo(todo.id)}
+        style={todo.isComplete ? { color: 'red' } : { color: 'blue' }}
+      >
+        {todo.text}
+      </div>
+      <div className="icons" key={todo.id * 10}>
+        <RiCloseCircleLine onClick={() => props.removeTodo(todo.id)} />
+        <TiEdit onClick={() => setEdit({ id: todo.id, value: todo.text })} />
+      </div>
     </>
-  );
+  ));
 };
 export default Todo;

@@ -1,8 +1,8 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { useState } from 'react';
 
 const TodoForm = (props) => {
-  const [input, setInput] = useState('');
-
+  const [input, setInput] = useState(props.edit ? props.edit.value : '');
   const handleChange = (e) => {
     setInput(e.target.value);
   };
