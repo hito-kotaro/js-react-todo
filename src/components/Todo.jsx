@@ -1,6 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
-// ↑PropTypesで型をarrayを指定でいるように
-
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { RiCloseCircleLine } from 'react-icons/ri';
@@ -59,6 +56,7 @@ const Todo = (props) => {
 };
 
 Todo.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   todos: PropTypes.array.isRequired,
   updateTodo: PropTypes.func.isRequired,
   completeTodo: PropTypes.func.isRequired,

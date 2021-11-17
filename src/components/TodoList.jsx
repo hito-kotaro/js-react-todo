@@ -29,9 +29,9 @@ const TodoList = () => {
   const competeTodo = (id) => {
     const updateTodos = todos.map((todo) => {
       if (todo.id === id) {
-        // ここ、ESLintで再割り当てのエラーが出る。
         // https://qiita.com/kjirou/items/65a781318b6506687fd3
         // todoのパラメータを変更したいため無視。 .eslintにルール追加
+        // eslint-disable-next-line no-param-reassign
         todo.isComplete = !todo.isComplete;
       }
       return todo;
