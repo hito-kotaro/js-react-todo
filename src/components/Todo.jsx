@@ -32,8 +32,9 @@ const Todo = (props) => {
       key={todo.id}
     >
       {/* divにonClickを適用しているから、役割が適切でない的なエラーが出る roleを入れてあげる必要がある? */}
-      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
+        role="button"
+        tabIndex={0}
         className="todo-text"
         onClick={() => props.completeTodo(todo.id)}
         // onKeyDownを入れないとESLintでエラーになる。キーボード操作の時の配慮らしい
@@ -56,8 +57,7 @@ const Todo = (props) => {
 };
 
 Todo.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  todos: PropTypes.array.isRequired,
+  todos: PropTypes.arrayOf().isRequired,
   updateTodo: PropTypes.func.isRequired,
   completeTodo: PropTypes.func.isRequired,
   removeTodo: PropTypes.func.isRequired,
