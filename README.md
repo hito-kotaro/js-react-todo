@@ -23,7 +23,7 @@ $ yarn start
 
 ## [disable]jsx-a11y/no-static-element-interactions @Todo.jsx:35
 
-div タグに対して onClick をつけていたため
+おそらく div タグに対して onClick をつけていたため
 ボタンではなく、カードをクリックした時に完了にする使用にしたかったので一旦無効
 
 ## [disable]react/forbid-prop-types @Todo.jsx:59
