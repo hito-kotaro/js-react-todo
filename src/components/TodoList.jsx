@@ -3,15 +3,17 @@ import TodoForm from './TodoForm';
 import Todo from './Todo';
 
 const TodoList = () => {
-  // todosは現在ListにあるTodoを保持する
+  // todosは現在配列ににあるTodoを保持する
   const [todos, setTodos] = useState([]);
-  const msg = 'TodoList';
 
-  // 引数todoはTodoFormから渡されている.
+  // todoはTodoFormから渡られた値 todoの入力値
   const addTodo = (todo) => {
+    // 余計な空白を削除する
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
     }
+
+    // 追加したTodoを現在のstateに追加して配列を作り、stateを更新する
     const newTodos = [todo, ...todos];
     setTodos(newTodos);
   };
@@ -41,11 +43,12 @@ const TodoList = () => {
     setTodos((prev) => prev.map((item) => (item.id === id ? newValue : item)));
   };
 
+  // 保持されたTodoリストと、入力フォームを表示する
   return (
     <div>
-      {/* onSubmitを実行した時に、親要素のaddTodoが実行される */}
-      <TodoForm onSubmit={addTodo} />
-      <h1>{msg}</h1>
+      {/* addTodoにaddTodo(関数)を入れて渡す */}
+      <TodoForm addTodo={addTodo} />
+      {/* Todoコンポーネントに更新したTodoListを渡す(todos={todos}) */}
       <Todo
         todos={todos}
         completeTodo={competeTodo}

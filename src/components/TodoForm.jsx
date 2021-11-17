@@ -10,7 +10,11 @@ const TodoForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // eslint-disable-next-line react/prop-types
-    props.onSubmit({
+    // 親要素のaddTodoを実行して、addTodoを実行している
+    // こいつは、Todo,TodoListどちらからも渡されている
+    // なんか気持ち悪いけどreactではOK
+    console.log(props);
+    props.addTodo({
       id: Math.floor(Math.random() * 10000),
       text: input,
     });
@@ -28,7 +32,6 @@ const TodoForm = (props) => {
       <button onClick={handleSubmit} type="button">
         Add Todo
       </button>
-      <h2>{input}</h2>
     </form>
   );
 };
