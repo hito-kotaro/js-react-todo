@@ -21,15 +21,15 @@ $ yarn start
 
 ## ESLint Rules
 
-## [disable]react/forbid-prop-types @Todo.jsx
-
-props の型を定義する時 todos を array で定義したかったが、このルールでエラー
-一旦無効
-
-## [disable]jsx-a11y/no-static-element-interactions @Todo.jsx
+## [disable]jsx-a11y/no-static-element-interactions @Todo.jsx:35
 
 div タグに対して onClick をつけていたため
 ボタンではなく、カードをクリックした時に完了にする使用にしたかったので一旦無効
+
+## [disable]react/forbid-prop-types @Todo.jsx:59
+
+props の型を定義する時 todos を array で定義したかったが、このルールでエラー
+一旦無効
 
 ## [warning]no-unused-vars @.eslint.yml
 
