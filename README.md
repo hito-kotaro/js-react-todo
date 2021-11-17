@@ -1,44 +1,15 @@
-# js-react-sample
+# js-react-todo
 
-react のプロジェクトに ESLint と Prettier を導入したサンプル
+シンプルな Todo リスト
+参考: https://www.youtube.com/watch?v=E1E08i2UJGI&t=2630s
 
 ## Usage
 
 ```
-$ git clone git@github.com:hito-kotaro/js-react-sample.git
+$ https://github.com/hito-kotaro/js-react-todo.git
+$ cd js-react-todo
 $ yarn
 $ yarn start
 ```
 
-## ESLint
-
-### extends
-
-- plugin:react/recommended
-- airbnb
-- prettier
-
-### ecma
-
-- ecmaVersion:12
-- ecmaFeature:jsx
-
-### plugin
-
-- react
-
-### rules
-
-- none
-
-## Prettier
-
-- singleQuote: true
-- trailingComma: all
-  and Default
-
-## VSCode Settings
-
-- eslint.format.enable: false
-- editor.formatOnSave: true
-- editor.defaultFormatter: esbenp.prettier-vscode
+=> http://localhost:3000

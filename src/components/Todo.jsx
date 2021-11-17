@@ -1,7 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/forbid-prop-types */
+// ↑PropTypesで型をarrayを指定でいるように
 
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 import TodoForm from './TodoForm';
@@ -11,6 +12,7 @@ const Todo = (props) => {
   // TodoListから渡されたpropsの中からtodosを取り出す
   const { todos } = props;
 
+  // 親要素のupdateTodoに更新対象のtodoのidと更新後の内容valueを渡して、現在のstateを初期化する
   const submitUpdate = (value) => {
     props.updateTodo(edit.id, value);
     setEdit({
@@ -23,26 +25,44 @@ const Todo = (props) => {
   // AddTodoがクリックされた時はsubmitUpdateを実行する
   // addTodoにsubmitUpdateを入れて渡す
   if (edit.id) {
-    return <TodoForm edit={edit} addTodo={submitUpdate} />;
+    return <TodoForm className="edit" edit={edit} addTodo={submitUpdate} />;
   }
 
   // TodoListから受け取ったtodosをmap関数で表示する
   return todos.map((todo) => (
-    // Consoleにエラーが出るのでkeyを追加
-    <div key={todo.id * 100}>
+    <div
+      className={todo.isComplete ? 'todo-row complete' : 'todo-row'}
+      key={todo.id}
+    >
+      {/* divにonClickを適用しているから、役割が適切でない的なエラーが出る roleを入れてあげる必要がある? */}
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
-        key={todo.id}
+        className="todo-text"
         onClick={() => props.completeTodo(todo.id)}
+        // onKeyDownを入れないとESLintでエラーになる。キーボード操作の時の配慮らしい
         onKeyDown={() => props.completeTodo(todo.id)}
-        style={todo.isComplete ? { color: 'red' } : { color: 'blue' }}
       >
         {todo.text}
       </div>
-      <div className="icons" key={todo.id * 10}>
-        <RiCloseCircleLine onClick={() => props.removeTodo(todo.id)} />
-        <TiEdit onClick={() => setEdit({ id: todo.id, value: todo.text })} />
+      <div className="icons">
+        <RiCloseCircleLine
+          className="delete-icon"
+          onClick={() => props.removeTodo(todo.id)}
+        />
+        <TiEdit
+          className="edit-icon"
+          onClick={() => setEdit({ id: todo.id, value: todo.text })}
+        />
       </div>
     </div>
   ));
 };
+
+Todo.propTypes = {
+  todos: PropTypes.array.isRequired,
+  updateTodo: PropTypes.func.isRequired,
+  completeTodo: PropTypes.func.isRequired,
+  removeTodo: PropTypes.func.isRequired,
+};
+
 export default Todo;
